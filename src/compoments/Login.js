@@ -21,6 +21,7 @@ const Login = () => {
 
   const [login, { isLoading, isError }] = authApi.useLoginMutation();
   const [getMe, {data: userData}] = authApi.useLazyGetMeQuery();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { openLogin } = useSelector((state) => state.auth);
@@ -31,8 +32,8 @@ const Login = () => {
       Cookies.set("token-dastan", response.token, {
         secure: true,
       });
-      await getMe();
-      dispatch(setUser(userData?.user))
+      getMe();
+      dispatch(setUser(userData?.user));
       dispatch(toggleLoginModal(false));
       navigate("/");
     } catch (error) {

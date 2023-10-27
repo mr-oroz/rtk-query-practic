@@ -20,7 +20,7 @@ import {
 import Cookies from "js-cookie";
 
 const pages = ["Главная", "Мои посты", "Добавить пост"];
-const settings = ["Профиль", "Выйти"];
+
 
 function MyAppbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -47,7 +47,6 @@ function MyAppbar() {
     dispatch(setUser(null));
     Cookies.remove("token-dastan");
     handleCloseUserMenu()
-    console.log("logout");
   };
 
   return (

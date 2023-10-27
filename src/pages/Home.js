@@ -3,16 +3,17 @@ import { authApi } from "../services/auth-api";
 import { setUser } from "../redux/slices/authSlice";
 import { useDispatch } from "react-redux";
 const Home = () => {
-  const { data: user } = authApi.useGetMeQuery("");
+  
+  const [getMe, {data: user}] = authApi.useLazyGetMeQuery()
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(user);
+    getMe()
     if (user) {
       dispatch(setUser(user.user))
     } 
-  }, [user, dispatch]);
+  }, [getMe, dispatch, user]);
 
   return <div>Home</div>;
 };
