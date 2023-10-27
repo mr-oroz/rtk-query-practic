@@ -20,7 +20,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const [login, { isLoading, isError }] = authApi.useLoginMutation();
-  const [getMe, {data: userData}] = authApi.useLazyGetMeQuery();
+  const [getMe, { data: userData }] = authApi.useLazyGetMeQuery();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -32,8 +32,10 @@ const Login = () => {
       Cookies.set("token-dastan", response.token, {
         secure: true,
       });
-      getMe();
-      dispatch(setUser(userData?.user));
+      await getMe();
+      if (userData) {
+        dispatch(setUser(userData?.user));
+      }
       dispatch(toggleLoginModal(false));
       navigate("/");
     } catch (error) {
