@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Cookies } from 'js-cookie';
 
 
 const initialState = {
   user: null,
-  token: null,
   openLogin: false,
   openRegister: false
 }
@@ -19,10 +19,13 @@ export const authSlice = createSlice({
     toggleRegisterModal: (state, action) => {
       state.openRegister = action.payload
       state.openLogin = false // false true
+    },
+    setUser: (state, action) => {
+      state.user = action.payload
     }
-  }
+  },
 });
 
-export const { toggleLoginModal, toggleRegisterModal } = authSlice.actions;
+export const { toggleLoginModal, toggleRegisterModal, setUser } = authSlice.actions;
 
 export default authSlice.reducer;
